@@ -26,7 +26,7 @@ export default function RegisterForm({ onClose }) {
       onClose();
       navigate("/teachers");
     } catch (error) {
-      // Firebase hata kodlarına göre kullanıcı dostu mesaj
+     
       switch (error.code) {
         case "auth/email-already-in-use":
           setFirebaseError("Bu e-posta zaten kayıtlı. Lütfen giriş yapın.");

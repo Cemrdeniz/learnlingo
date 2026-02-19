@@ -26,7 +26,7 @@ export default function LoginForm({ onClose }) {
       onClose();
       navigate("/teachers");
     } catch (error) {
-      // Firebase hata kodlarına göre kullanıcı dostu mesaj
+      
       switch (error.code) {
         case "auth/user-not-found":
           setFirebaseError("Hesap bulunamadı. Lütfen kayıt olun.");
