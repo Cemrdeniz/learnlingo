@@ -65,18 +65,18 @@
   transition: all 0.2s ease;
 }
 
-/* Hover */
+
 .submitBtn:hover {
   background: #e5a72d;
   transform: translateY(-2px);
 }
 
-/* Click efekti */
+
 .submitBtn:active {
   transform: scale(0.98);
 }
 
-/* Disabled hali */
+
 .submitBtn:disabled {
   background: #f4b74080;
   cursor: not-allowed;

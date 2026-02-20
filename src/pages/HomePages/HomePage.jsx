@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import RegisterForm from "../../components/Auth/RegisterForm";
 import LoginForm from "../../components/Auth/LoginForm";
@@ -10,12 +11,25 @@ import avatar from "/avatar.png";
 export default function HomePage() {
   const [open, setOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [authWarning, setAuthWarning] = useState("");
 
   const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpen(false);
     setIsRegister(false);
+    setAuthWarning("");
+  };
+
+  const handleTeachersClick = () => {
+    if (!user) {
+      setAuthWarning("You must login to view teachers.");
+      setIsRegister(false);
+      setOpen(true);
+    } else {
+      navigate("/teachers");
+    }
   };
 
   return (
@@ -32,14 +46,24 @@ export default function HomePage() {
             </div>
 
             <nav className={styles.navLinks}>
-              <a href="/">Home</a>
-              <a href="/teachers">Teachers</a>
+              <button
+                className={styles.navLinkBtn}
+                onClick={() => navigate("/")}
+              >
+                Home
+              </button>
+
+              <button
+                className={styles.navLinkBtn}
+                onClick={handleTeachersClick}
+              >
+                Teachers
+              </button>
             </nav>
 
             <div className={styles.authButtons}>
               {user ? (
                 <>
-                  {/* Login iconu kaldırıldı */}
                   <span className={styles.userEmail}>{user.email}</span>
                   <button className={styles.registerBtn} onClick={logout}>
                     Logout
@@ -50,6 +74,7 @@ export default function HomePage() {
                   <button
                     className={styles.loginBtn}
                     onClick={() => {
+                      setAuthWarning("");
                       setIsRegister(false);
                       setOpen(true);
                     }}
@@ -65,6 +90,7 @@ export default function HomePage() {
                   <button
                     className={styles.registerBtn}
                     onClick={() => {
+                      setAuthWarning("");
                       setIsRegister(true);
                       setOpen(true);
                     }}
@@ -98,6 +124,7 @@ export default function HomePage() {
               <button
                 className={styles.getStarted}
                 onClick={() => {
+                  setAuthWarning("");
                   setIsRegister(true);
                   setOpen(true);
                 }}
@@ -164,10 +191,15 @@ export default function HomePage() {
         <Modal closeModal={handleClose}>
           <div className={styles.authWrapper}>
             
+            {authWarning && (
+              <div className={styles.warningBox}>
+                {authWarning}
+              </div>
+            )}
+
             {isRegister ? (
               <>
                 <RegisterForm onClose={handleClose} />
-
                 <div className={styles.switchBox}>
                   <p>
                     Already have an account?
@@ -183,7 +215,6 @@ export default function HomePage() {
             ) : (
               <>
                 <LoginForm onClose={handleClose} />
-
                 <div className={styles.switchBox}>
                   <p>
                     Don’t have an account?

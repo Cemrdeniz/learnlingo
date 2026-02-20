@@ -225,7 +225,7 @@
   background: white;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 🔥 default 2 kolon */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 30px;
 }
 
@@ -262,7 +262,7 @@
   }
 
   .stats {
-    grid-template-columns: repeat(2, 1fr); /* 2 + 2 */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
@@ -270,7 +270,7 @@
 
 @media (min-width: 1080px) {
   .stats {
-    grid-template-columns: repeat(4, 1fr); /* 🔥 4’lü */
+    grid-template-columns: repeat(4, 1fr); 
   }
 
   .heroContent {
@@ -295,7 +295,23 @@
     font-size: 44px;
   }
 }
+.navLinkBtn {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
 
+.warningBox {
+  background-color: #ffe0e0;
+  color: #d8000c;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+}
 /* ================= ULTRA WIDE ================= */
 
 @media (min-width: 1980px) {
