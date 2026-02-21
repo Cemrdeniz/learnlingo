@@ -1,0 +1,84 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formWrapper h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroup input {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+.inputGroup input:focus {
+  border-color: #f4b740;
+}
+
+.error {
+  font-size: 13px;
+  color: #e74c3c;
+}
+
+.firebaseError {
+  background: #ffe6e6;
+  color: #c0392b;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.submitBtn {
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+
+  background: #f4b740;
+  color: #111;
+
+  font-weight: 600;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.submitBtn:hover {
+  background: #e5a72d;
+  transform: translateY(-2px);
+}
+
+/* Click efekti */
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+/* Disabled hali */
+.submitBtn:disabled {
+  background: #f4b74080;
+  cursor: not-allowed;
+  transform: none;
+}

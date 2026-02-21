@@ -1,0 +1,322 @@
+:root {
+  --primary: #f4b740;
+  --primary-hover: #e5a72d;
+  --text-dark: #111;
+  --text-light: #666;
+}
+
+/* ================= BASE ================= */
+
+.homepage {
+  font-family: "Inter", sans-serif;
+  background: #f8f8f8;
+  min-height: 99vh;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.authWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.switchBox {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.switchLink {
+  margin-left: 6px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.switchLink:hover {
+  text-decoration: underline;
+  color: var(--primary-hover);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  background: #ffffff;
+  padding: 18px 0;
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoImg {
+  width: 32px;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.navLinks {
+  display: none;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navLinks a:hover {
+  color: var(--primary);
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loginBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.registerBtn {
+  background: #111;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #fff;
+}
+
+.registerBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  padding: 50px 0;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heroLeft {
+  background: #eeeeee;
+  padding: 40px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+}
+
+.heroLeft h1 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.italic {
+  background: #f3d78d;
+  padding: 0 6px;
+  border-radius: 6px;
+}
+
+.heroLeft p {
+  color: var(--text-light);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.getStarted {
+  background: var(--primary);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  width: fit-content;
+  align-self: center;
+}
+
+.getStarted:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.heroRight {
+  background: #f3d78d;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroImg {
+  max-width: 380px;
+  width: 100%;
+}
+
+/* ================= STATS ================= */
+
+.statsSection {
+  margin: 60px 0;
+}
+
+.stats {
+  padding: 40px;
+  border: 2px dashed var(--primary);
+  border-radius: 40px;
+  background: white;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 🔥 default 2 kolon */
+  gap: 30px;
+}
+
+.statsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.statsNumber {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+.statsText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.statsText span {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* ================= 768px+ ================= */
+
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
+    gap: 30px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr); /* 2 + 2 */
+  }
+}
+
+/* ================= 1080px+ ================= */
+
+@media (min-width: 1080px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr); /* 🔥 4’lü */
+  }
+
+  .heroContent {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .heroLeft {
+    flex: 1;
+    text-align: left;
+  }
+
+  .getStarted {
+    align-self: flex-start;
+  }
+
+  .heroRight {
+    flex: 1;
+  }
+
+  .heroLeft h1 {
+    font-size: 44px;
+  }
+}
+
+/* ================= ULTRA WIDE ================= */
+
+@media (min-width: 1980px) {
+  .container {
+    max-width: 1700px;
+  }
+
+  .heroLeft h1 {
+    font-size: 60px;
+  }
+
+  .heroLeft p {
+    font-size: 20px;
+  }
+
+  .heroImg {
+    max-width: 600px;
+  }
+
+  .getStarted {
+    padding: 18px 50px;
+    font-size: 18px;
+  }
+}

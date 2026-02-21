@@ -1,0 +1,48 @@
+/* Arka karartma */
+.backdrop {
+  position: fixed;       /* SAYFAYA SABİTLER */
+  inset: 0;              /* top:0 right:0 bottom:0 left:0 */
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;         /* En üstte olsun */
+}
+
+/* Modal kutusu */
+.modal {
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+
+  position: relative;
+
+  animation: popup 0.25s ease;
+}
+
+/* Kapatma butonu */
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Açılma animasyonu */
+@keyframes popup {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

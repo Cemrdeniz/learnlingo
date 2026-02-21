@@ -1,0 +1,49 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+}
+
+input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: #f4c542;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.submitBtn {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #f4c542;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
