@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -15,11 +15,14 @@ const schema = yup.object().shape({
 
 export default function BookingForm({ teacher, onClose }) {
   const { user } = useContext(AuthContext);
+  const [status, setStatus] = useState(null); // success | error
+  const [message, setMessage] = useState("");
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -27,17 +30,26 @@ export default function BookingForm({ teacher, onClose }) {
   const onSubmit = async (data) => {
     try {
       if (!user) {
-        alert("You must be logged in!");
+        setStatus("error");
+        setMessage("You must be logged in to book a lesson.");
         return;
       }
 
       await addBooking(user.uid, teacher, data);
 
-      alert("Trial lesson booked!");
-      onClose();
+      setStatus("success");
+      setMessage("Trial lesson booked successfully!");
+
+      reset();
+
+      // 2 saniye sonra modal kapansın
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (err) {
       console.error("Booking failed:", err);
-      alert("Booking failed!");
+      setStatus("error");
+      setMessage("Booking failed. Please try again.");
     }
   };
 
@@ -47,36 +59,41 @@ export default function BookingForm({ teacher, onClose }) {
         Book Trial Lesson with {teacher.name}
       </h3>
 
+      {/* STATUS MESSAGE */}
+      {message && (
+        <div
+          className={
+            status === "success"
+              ? styles.successBox
+              : styles.errorBox
+          }
+        >
+          {message}
+        </div>
+      )}
+
       <label>
         Your Name
         <input {...register("studentName")} />
-        <p className={styles.error}>
-          {errors.studentName?.message}
-        </p>
+        <p className={styles.error}>{errors.studentName?.message}</p>
       </label>
 
       <label>
         Email
         <input {...register("email")} />
-        <p className={styles.error}>
-          {errors.email?.message}
-        </p>
+        <p className={styles.error}>{errors.email?.message}</p>
       </label>
 
       <label>
         Date
         <input type="date" {...register("date")} />
-        <p className={styles.error}>
-          {errors.date?.message}
-        </p>
+        <p className={styles.error}>{errors.date?.message}</p>
       </label>
 
       <label>
         Hour
         <input type="time" {...register("hour")} />
-        <p className={styles.error}>
-          {errors.hour?.message}
-        </p>
+        <p className={styles.error}>{errors.hour?.message}</p>
       </label>
 
       <button type="submit" className={styles.submitBtn}>

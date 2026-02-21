@@ -9,30 +9,54 @@ import Modal from "../Modal/Modal";
 import BookingForm from "../BookingForm/BookingForm";
 import styles from "./TeacherCard.module.css";
 
-export default function TeacherCard({ teacher }) {
+export default function TeacherCard({ teacher, onRefresh }) {
   const { user } = useContext(AuthContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const [openBooking, setOpenBooking] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
+  // FAVORITE CHECK
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setIsFavorite(false);
+      return;
+    }
+
     const checkFavorite = async () => {
-      const favorites = await fetchFavorites(user.uid);
-      const found = favorites.some((fav) => fav.id === teacher.id);
-      setIsFavorite(found);
+      try {
+        const favorites = await fetchFavorites(user.uid);
+        const found = favorites.some((fav) => fav.id === teacher.id);
+        setIsFavorite(found);
+      } catch (error) {
+        console.error("Favorite check error:", error);
+      }
     };
+
     checkFavorite();
   }, [user, teacher.id]);
 
+  // FAVORITE TOGGLE
   const handleFavorite = async () => {
-    if (!user) return alert("Login required");
-    if (isFavorite) {
-      await removeFavorite(user.uid, teacher.id);
-      setIsFavorite(false);
-    } else {
-      await addFavorite(user.uid, teacher);
-      setIsFavorite(true);
+    try {
+      if (!user) {
+        alert("You must login first!");
+        return;
+      }
+
+      if (isFavorite) {
+        await removeFavorite(user.uid, teacher.id);
+        setIsFavorite(false);
+      } else {
+        await addFavorite(user.uid, teacher);
+        setIsFavorite(true);
+      }
+
+      // Parent refresh (TeachersPage)
+      if (onRefresh) {
+        onRefresh();
+      }
+    } catch (error) {
+      console.error("Favorite toggle error:", error);
     }
   };
 
@@ -81,13 +105,18 @@ export default function TeacherCard({ teacher }) {
               <div className={styles.divider}></div>
 
               <div className={styles.statItem}>
-                <span>Price/1 hour: {teacher.price_per_hour || 0}$</span>
+                <span>
+                  Price/1 hour: {teacher.price_per_hour || 0}$
+                </span>
               </div>
 
               <div className={styles.divider}></div>
 
-              {/* FAVORITE PHOTO */}
-              <div onClick={handleFavorite} style={{ cursor: "pointer" }}>
+              {/* FAVORITE ICON */}
+              <div
+                onClick={handleFavorite}
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={isFavorite ? "/dolukalp.png" : "/boskalp.png"}
                   alt="Favorite"
@@ -105,14 +134,16 @@ export default function TeacherCard({ teacher }) {
           </p>
 
           <p>
-            <strong className={styles.label}>Lesson Info:</strong> {teacher.lesson_info}
+            <strong className={styles.label}>Lesson Info:</strong>{" "}
+            {teacher.lesson_info}
           </p>
 
           <p>
-            <strong className={styles.label}>Conditions:</strong> {teacher.conditions}
+            <strong className={styles.label}>Conditions:</strong>{" "}
+            {teacher.conditions}
           </p>
 
-          {/* READ MORE BUTTON */}
+          {/* READ MORE */}
           <button
             className={styles.readMore}
             onClick={() => setShowMore(!showMore)}
@@ -120,13 +151,14 @@ export default function TeacherCard({ teacher }) {
             {showMore ? "Show less" : "Read more"}
           </button>
 
-          {/* EXPERIENCE + REVIEWS + BOOK BUTTON (READ MORE) */}
+          {/* EXPANDED SECTION */}
           {showMore && (
             <>
               <p className={styles.experienceText}>
                 {teacher.experience}
               </p>
 
+              {/* REVIEWS */}
               {teacher.reviews &&
                 teacher.reviews.map((review, index) => (
                   <div key={index} className={styles.review}>
@@ -142,7 +174,9 @@ export default function TeacherCard({ teacher }) {
                         <strong>{review.reviewer_name}</strong>
                         <div className={styles.ratingIcon}>
                           <img src="/star.png" alt="Rating" />
-                          <span>{review.reviewer_rating.toFixed(1)} </span>
+                          <span>
+                            {review.reviewer_rating.toFixed(1)}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -150,8 +184,7 @@ export default function TeacherCard({ teacher }) {
                   </div>
                 ))}
 
-
-              {/* BOOK BUTTON (READ MORE SONRASI) */}
+              {/* BOOK BUTTON */}
               <button
                 type="button"
                 className={styles.bookBtn}
@@ -174,7 +207,7 @@ export default function TeacherCard({ teacher }) {
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* BOOKING MODAL */}
       {openBooking && (
         <Modal closeModal={() => setOpenBooking(false)}>
           <BookingForm

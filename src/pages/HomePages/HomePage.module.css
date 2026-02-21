@@ -295,7 +295,23 @@
     font-size: 44px;
   }
 }
+.navLinkBtn {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
 
+.warningBox {
+  background-color: #ffe0e0;
+  color: #d8000c;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+}
 /* ================= ULTRA WIDE ================= */
 
 @media (min-width: 1980px) {

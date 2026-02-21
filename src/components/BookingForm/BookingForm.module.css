@@ -32,7 +32,31 @@ input:focus {
   font-size: 12px;
   color: red;
 }
+.successBox {
+  background-color: #e6f9f0;
+  color: #0f9d58;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
 
+.errorBox {
+  background-color: #ffeaea;
+  color: #d93025;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error {
+  color: #d93025;
+  font-size: 13px;
+  margin-top: 4px;
+}
 .submitBtn {
   margin-top: 10px;
   padding: 14px;

@@ -7,7 +7,7 @@ import styles from "./TeachersPage.module.css";
 
 export default function TeachersPage() {
   const { user } = useContext(AuthContext);
-
+const [refresh, setRefresh] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [filters, setFilters] = useState({
     language: "",
@@ -19,36 +19,35 @@ export default function TeachersPage() {
   const [loading, setLoading] = useState(true);
 
   // 🔥 Öğretmenleri + Favorileri yükle
-  useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
+useEffect(() => {
+  const loadData = async () => {
+    setLoading(true);
 
-      try {
-        const teacherData = await fetchTeachers();
+    try {
+      const teacherData = await fetchTeachers();
 
-        // Eğer user varsa favorileri de çek
-        if (user) {
-          const favs = await fetchFavorites(user.uid);
-          const favIds = favs.map((f) => f.id);
+      if (user) {
+        const favs = await fetchFavorites(user.uid);
+        const favIds = favs.map((f) => f.id);
 
-          const updatedTeachers = teacherData.map((teacher) => ({
-            ...teacher,
-            isFavorite: favIds.includes(teacher.id),
-          }));
+        const updatedTeachers = teacherData.map((teacher) => ({
+          ...teacher,
+          isFavorite: favIds.includes(teacher.id),
+        }));
 
-          setTeachers(updatedTeachers);
-        } else {
-          setTeachers(teacherData);
-        }
-      } catch (err) {
-        console.error("Error loading teachers:", err);
+        setTeachers(updatedTeachers);
+      } else {
+        setTeachers(teacherData);
       }
+    } catch (err) {
+      console.error("Error loading teachers:", err);
+    }
 
-      setLoading(false);
-    };
+    setLoading(false);
+  };
 
-    loadData();
-  }, [user]);
+  loadData();
+}, [user, refresh]); // 🔥 refresh eklendi
 
   // 🔥 Filtreleme
 const filteredTeachers = teachers.filter((teacher) => {
@@ -84,7 +83,11 @@ const filteredTeachers = teachers.filter((teacher) => {
           <p>No teachers found.</p>
         ) : (
           filteredTeachers.map((teacher) => (
-            <TeacherCard key={teacher.id} teacher={teacher} />
+            <TeacherCard
+  key={teacher.id}
+  teacher={teacher}
+  onRefresh={() => setRefresh(!refresh)}
+/>
           ))
         )}
       </div>
