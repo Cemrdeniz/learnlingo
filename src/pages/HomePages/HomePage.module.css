@@ -225,7 +225,7 @@
   background: white;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 🔥 default 2 kolon */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 30px;
 }
 
@@ -262,7 +262,7 @@
   }
 
   .stats {
-    grid-template-columns: repeat(2, 1fr); /* 2 + 2 */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
@@ -270,7 +270,7 @@
 
 @media (min-width: 1080px) {
   .stats {
-    grid-template-columns: repeat(4, 1fr); /* 🔥 4’lü */
+    grid-template-columns: repeat(4, 1fr); 
   }
 
   .heroContent {

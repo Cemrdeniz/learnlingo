@@ -18,7 +18,7 @@ const [refresh, setRefresh] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
-  // 🔥 Öğretmenleri + Favorileri yükle
+  
 useEffect(() => {
   const loadData = async () => {
     setLoading(true);
@@ -47,7 +47,7 @@ useEffect(() => {
   };
 
   loadData();
-}, [user, refresh]); // 🔥 refresh eklendi
+}, [user, refresh]);
 
   // 🔥 Filtreleme
 const filteredTeachers = teachers.filter((teacher) => {
