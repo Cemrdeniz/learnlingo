@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 
 export default function BookingForm({ teacher, onClose }) {
   const { user } = useContext(AuthContext);
-  const [status, setStatus] = useState(null); // success | error
+  const [status, setStatus] = useState(null); 
   const [message, setMessage] = useState("");
 
   const {
@@ -42,7 +42,7 @@ export default function BookingForm({ teacher, onClose }) {
 
       reset();
 
-      // 2 saniye sonra modal kapansın
+      
       setTimeout(() => {
         onClose();
       }, 2000);
@@ -59,7 +59,7 @@ export default function BookingForm({ teacher, onClose }) {
         Book Trial Lesson with {teacher.name}
       </h3>
 
-      {/* STATUS MESSAGE */}
+      {}
       {message && (
         <div
           className={

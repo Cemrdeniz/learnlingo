@@ -35,7 +35,7 @@ export default function TeacherCard({ teacher, onRefresh }) {
     checkFavorite();
   }, [user, teacher.id]);
 
-  // FAVORITE TOGGLE
+ 
   const handleFavorite = async () => {
     try {
       if (!user) {
@@ -51,7 +51,7 @@ export default function TeacherCard({ teacher, onRefresh }) {
         setIsFavorite(true);
       }
 
-      // Parent refresh (TeachersPage)
+      
       if (onRefresh) {
         onRefresh();
       }

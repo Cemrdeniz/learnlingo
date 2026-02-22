@@ -2,11 +2,7 @@ import { db } from "./config";
 import { ref, set, get, remove } from "firebase/database";
 
 
-// ======================
-// TEACHERS
-// ======================
 
-// Tüm öğretmenleri çek
 export const fetchTeachers = async () => {
   try {
     const snapshot = await get(ref(db, "teachers"));
@@ -28,9 +24,6 @@ export const fetchTeachers = async () => {
 };
 
 
-// ======================
-// FILTER OPTIONS (🔥 EKLENDİ)
-// ======================
 
 export const fetchFilterOptions = async () => {
   try {
@@ -45,21 +38,21 @@ export const fetchFilterOptions = async () => {
     const prices = new Set();
 
     Object.values(data).forEach((teacher) => {
-      // Languages
+   
       if (Array.isArray(teacher.languages)) {
         teacher.languages.forEach((l) => languages.add(l));
       } else if (teacher.languages) {
         languages.add(teacher.languages);
       }
 
-      // Levels
+  
       if (Array.isArray(teacher.levels)) {
         teacher.levels.forEach((lvl) => levels.add(lvl));
       } else if (teacher.levels) {
         levels.add(teacher.levels);
       }
 
-      // Price
+     
       if (teacher.price_per_hour) {
         prices.add(Number(teacher.price_per_hour));
       }
@@ -77,11 +70,7 @@ export const fetchFilterOptions = async () => {
 };
 
 
-// ======================
-// FAVORITES
-// ======================
 
-// Kullanıcının favorilerini çek
 export const fetchFavorites = async (userId) => {
   try {
     const snapshot = await get(ref(db, `favorites/${userId}`));
@@ -103,7 +92,7 @@ export const fetchFavorites = async (userId) => {
 };
 
 
-// Favorilere ekle
+
 export const addFavorite = async (userId, teacher) => {
   try {
     const favRef = ref(db, `favorites/${userId}/${teacher.id}`);
@@ -114,7 +103,7 @@ export const addFavorite = async (userId, teacher) => {
 };
 
 
-// Favorilerden çıkar
+
 export const removeFavorite = async (userId, teacherId) => {
   try {
     const favRef = ref(db, `favorites/${userId}/${teacherId}`);
@@ -125,9 +114,7 @@ export const removeFavorite = async (userId, teacherId) => {
 };
 
 
-// ======================
-// BOOKINGS
-// ======================
+
 
 export const addBooking = async (userId, teacher, bookingData) => {
   try {

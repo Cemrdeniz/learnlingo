@@ -196,7 +196,7 @@
   background: #e0a800;
 }
 
-/* RESPONSIVE */
+
 @media (max-width: 1024px) {
   .card {
     flex-direction: column;

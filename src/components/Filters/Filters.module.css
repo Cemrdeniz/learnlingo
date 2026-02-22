@@ -36,7 +36,7 @@
 }
 
 .arrow {
-  font-size: 25px;   /* büyüttük */
+  font-size: 25px;  
   color: #555;
   transition: 0.2s ease;
 }
@@ -86,7 +86,7 @@
   }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .wrapper {
     flex-direction: column;
