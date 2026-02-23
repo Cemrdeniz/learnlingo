@@ -1,21 +1,25 @@
+/* Main form layout */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; /* spacing between form elements */
 }
 
+/* Form title styling */
 .title {
   margin-bottom: 10px;
   font-weight: 600;
 }
 
+/* Label layout for inputs */
 label {
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  gap: 6px;
+  gap: 6px; /* space between label text and input */
 }
 
+/* Input field styling */
 input {
   padding: 12px;
   border-radius: 10px;
@@ -23,15 +27,20 @@ input {
   font-family: inherit;
 }
 
+/* Input focus state */
 input:focus {
   outline: none;
   border-color: #f4c542;
 }
 
+/* Error text under inputs */
 .error {
-  font-size: 12px;
-  color: red;
+  color: #d93025;
+  font-size: 13px;
+  margin-top: 4px;
 }
+
+/* Success message box */
 .successBox {
   background-color: #e6f9f0;
   color: #0f9d58;
@@ -42,6 +51,7 @@ input:focus {
   font-weight: 500;
 }
 
+/* Error message box */
 .errorBox {
   background-color: #ffeaea;
   color: #d93025;
@@ -52,11 +62,7 @@ input:focus {
   font-weight: 500;
 }
 
-.error {
-  color: #d93025;
-  font-size: 13px;
-  margin-top: 4px;
-}
+/* Submit button styling */
 .submitBtn {
   margin-top: 10px;
   padding: 14px;
@@ -65,9 +71,10 @@ input:focus {
   background: #f4c542;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
+/* Button hover effect */
 .submitBtn:hover {
   opacity: 0.9;
 }
